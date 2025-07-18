@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [nombre, setNombre] = useState('');
+  const [mensaje, setMensaje] = useState('');
+
+  const manejarClick = () => {
+    if (nombre.trim() === '') {
+      setMensaje('Por favor ingresa un nombre primero 😉');
+    } else {
+      setMensaje(`${nombre} eres gay por presionarme 😂`);
+      setNombre(''); // Limpia el campo
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+    <div style={{ textAlign: 'center', marginTop: '100px', fontFamily: 'Arial, sans-serif' }}>
+      <h1>¡Interfaz React divertida y un poco picante!</h1>
+
+      <input
+        type="text"
+        placeholder="Ingresa tu nombre"
+        value={nombre}
+        onChange={(e) => setNombre(e.target.value)}
+        style={{ padding: '10px', fontSize: '16px', width: '250px' }}
+      />
+
+      <br />
+
+      <button
+        onClick={manejarClick}
+        style={{
+          marginTop: '15px',
+          padding: '10px 25px',
+          fontSize: '16px',
+          cursor: 'pointer',
+          backgroundColor: '#6200ea',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+        }}
+      >
+        Presióname
+      </button>
+
+      {mensaje && (
+        <p
+          style={{
+            marginTop: '20px',
+            fontSize: '18px',
+            color: '#4B0082', // color morado oscuro que resalta
+            fontWeight: 'bold',
+            textShadow: '1px 1px 2px rgba(0,0,0,0.2)',
+          }}
+        >
+          {mensaje}
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
